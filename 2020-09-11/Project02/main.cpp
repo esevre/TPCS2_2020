@@ -10,6 +10,8 @@ template <class Type>
 class Point {
 public:
     Point(Type x, Type y) : x(x), y(y) {}
+    Point() = default;
+    Point(const Point &point) = default;
 public:
     Type x{};
     Type y{};
@@ -37,12 +39,15 @@ int main()
     std::vector<Point<int>> int_points;
     const int vec_size = 10;
     int_points.reserve(vec_size*2);
+
     for (int i = 0; i < vec_size; ++i) {
         // pushes an object onto the end of a vector
         int_points.push_back( Point<int>(i, 2*i) );
         // creates an object with given parameters at the end of a vector
         int_points.emplace_back(i, 2*i);
     }
+    // C++11 (and newer) range based for loop
+    //    similar to pythonic:   for point in container
     for (const auto &point : int_points) {
         print(point);
     }
