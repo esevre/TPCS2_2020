@@ -6,36 +6,14 @@
 #include <complex>
 #include <vector>
 
-template <class Type>
-class Point {
-public:
-    Point(Type x, Type y) : x(x), y(y) {}
-    Point() = default;
-    Point(const Point &point) = default;
-public:
-    Type x{};
-    Type y{};
-};
-
-
-// generic function to print Point objects
-template <class Type>
-void print(const Point<Type> &point)
-{
-    std::cout << "(" << point.x << ", " << point.y << ")\n";
-}
-
-// use a template specialization to print a complex point with the formatting I like
-template <class ComplexType>
-void print(const Point<std::complex<ComplexType>> &point) {
-    std::cout << "("
-              << point.x.real() << " + " << point.x.imag() << "i, "
-              << point.y.real() << " + " << point.y.imag() << "i)\n";
-
-}
+#include "Point.hpp"
 
 int main()
 {
+    // show difference between copying and creating in place
+    Point<int> p0 = Point<int>(9,9);
+    print(p0);
+
     std::vector<Point<int>> int_points;
     const int vec_size = 10;
     int_points.reserve(vec_size*2);
