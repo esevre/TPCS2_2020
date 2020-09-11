@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#include <complex>
 
 template <class Type>
 class Point {
@@ -22,9 +23,20 @@ void print(const Point<Type> &point)
     std::cout << "(" << point.x << ", " << point.y << ")\n";
 }
 
+template <class ComplexType>
+void print(const Point<std::complex<ComplexType>> &point) {
+    std::cout << "("
+              << point.x.real() << " + " << point.x.imag() << "i, "
+              << point.y.real() << " + " << point.y.imag() << "i)\n";
+
+}
 
 int main(){
     Point<int> p{1,2};
     print(p);
+
+    Point<std::complex<long double>> p2 {{1, 2}, {3, 4}};
+    print(p2);
+
     return p.x;
 }
