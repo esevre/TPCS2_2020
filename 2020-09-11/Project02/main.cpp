@@ -5,6 +5,7 @@
 #include <iostream>
 #include <complex>
 #include <vector>
+#include <array>
 
 #include "Point.hpp"
 
@@ -27,6 +28,17 @@ int main()
     // C++11 (and newer) range based for loop
     //    similar to pythonic:   for point in container
     for (const auto &point : int_points) {
+        print(point);
+    }
+
+    std::cout << "********************************\n";
+    // Looking at arrays
+    std::array<Point<int>, vec_size> p_array;
+    for (auto &point : p_array) {
+        point.x = 3;
+        point.y = 4;
+    }
+    for (const auto &point : p_array) {
         print(point);
     }
 
