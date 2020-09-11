@@ -31,13 +31,7 @@ void print(const Point<std::complex<ComplexType>> &point) {
 
 }
 
-int main(){
-    Point<int> p{1,2};
-    print(p);
-    Point<int> p_copy = p;
-    print(p_copy);
-    Point<std::complex<long double>> p2 {{1, 2}, {3, 4}};
-    print(p2);
+int main()
+{
 
-    return p.x;
 }
