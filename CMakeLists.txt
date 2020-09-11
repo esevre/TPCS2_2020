@@ -6,3 +6,9 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_executable(TPCS2_2020 main.cpp)
 
+project(2020_09_11_project01)
+set(CMAKE_CXX_STANDARD 20)
+
+add_executable(2020_09_11_project01 2020-09-11/Project01/main.cpp)
+
+
