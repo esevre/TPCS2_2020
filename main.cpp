@@ -1,7 +1,8 @@
-#include <iostream>
 
+#include "cypher/Point.hpp"
 
 int main() {
-    std::cout << "Hello, Class!" << std::endl;
+    Point<int> p{1,2};
+    p.print();
     return 0;
 }

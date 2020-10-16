@@ -29,9 +29,9 @@ char to_uppercase(char c) {
 
 char to_lowercase(char c) {
     const int A = encodeAscii('A');
-    const int Z = encodeAscii('A');
+    const int Z = encodeAscii('Z');
     if (c >= A && c <= Z) {
-        const int a = encodeAscii('A');
+        const int a = encodeAscii('a');
         const int diff = a-A;
         return encodeAscii(c + diff);
     }
