@@ -23,4 +23,9 @@ set(CMAKE_CXX_STANDARD 20)
 add_executable(2020_09_11_project02 2020-09-11/Project02/main.cpp 2020-09-11/Project02/Point.hpp)
 
 
+project(2020_10_linked_lists)
+
+add_executable(2020_10_linked_lists LinkedLists/main.cpp)
+
+
 add_subdirectory(GoogleTests)
