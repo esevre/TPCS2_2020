@@ -1,8 +1,17 @@
 
-#include "cypher/Point.hpp"
+#include <fstream>
+#include <vector>
+
+void write_file(std::string filename, std::vector<int> &vector)
+{
+    std::ofstream outfile(filename);
+    for (const auto &data : vector) {
+        outfile << data << "\n";
+    }
+}
+
 
 int main() {
-    Point<int> p{1,2};
-    p.print();
-    return 0;
+    std::vector<int> vec{1,2,3,4,5, 101, 202, 303};
+    write_file("filename.txt", vec);
 }
