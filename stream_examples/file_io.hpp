@@ -5,11 +5,27 @@
 
 #include <fstream>
 #include <string>
+#include <vector>
+#include <array>
 
 auto file_size(std::string filename)
 {
     std::ifstream infile(filename, std::ios::binary | std::ios::ate);
     return infile.tellg();
+}
+
+std::vector<int> read_file_vec(std::string filename)
+{
+    std::vector<int> data_vec;
+    int data;
+    std::ifstream infile(filename);
+    while (infile.good()) {
+        infile >> data;
+        if (infile.good()) {
+            data_vec.push_back(data);
+        }
+    }
+    return data_vec;
 }
 
 std::string read_file_as_string(std::string filename){
