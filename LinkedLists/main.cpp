@@ -60,6 +60,20 @@ public:
         }
     }
 
+    // Do a deep copy for the assignment operator
+    LinkedListRef operator=(const LinkedListRef list) {
+        // our head will be overwritten with the new list
+        delete head;     // delete this list
+        head = nullptr;  // make sure our head is pointing to the nullptr
+        auto pos = list.first();
+        while (pos) {
+            push_back(pos->value);
+            pos = pos->next;
+        }
+        return *this;
+    }
+
+
     LinkedListRef push_back(const Type &val)
     {
         if (head) {
@@ -182,6 +196,27 @@ bool merge_test(bool print_lists = false){
     return true;
 }
 
+bool deep_assignment_test() {
+    LinkedList<int> list01 {1, 2, 3, 4, 5};
+    LinkedList<int> list02 {10, 20, 30, 40, 50, 60, 70, 80, 90};
+
+    list02 = list01;
+    auto pos1 = list01.first();
+    auto pos2 = list02.first();
+    // loop while both pos1 and pos2 are not nullptr
+    while (pos1 && pos2) {
+        if (pos1->value != pos2->value) {
+            return false;
+        }
+        pos1 = pos1->next;
+        pos2 = pos2->next;
+    }
+    // both position variables should be nullptr, if one is not, then something is wrong
+    if (pos1 != nullptr || pos2 != nullptr) {
+        return false;
+    }
+    return true;
+}
 
 
 int main(){
@@ -189,6 +224,12 @@ int main(){
         std::cout << "merge test SUCCESS\n";
     } else {
         std::cout << "merge test FAILURE\n";
+    }
+
+    if (deep_assignment_test()) {
+        std::cout << "deep assignment test SUCCESS\n";
+    } else {
+        std::cout << "deep assignment test FAILURE\n";
     }
 
 
