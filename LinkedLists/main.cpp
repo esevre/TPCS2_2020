@@ -197,26 +197,7 @@ int main(){
     } else {
         std::cout << "merge test FAILURE\n";
     }
-//    ForwardNode<double> *n1 = new ForwardNode<double>(1.1);
-//    n1->insert_after(2.2);
-//    n1->insert_after(3.3);
-//    n1->insert_after(4.4);
-//    n1->insert_after(5.5);
-//    n1->insert_after(6.6);
 
-//    LinkedList<int> list;
-//    list.push_back(1);
-//    list.push_back(2);
-//    list.push_back(3).push_back(4);
-
-//    LinkedList<double> list_d {1.1, 2.2, 3.3, 4.4, 5.5, 6.6};
-
-
-//    print(list);
-//    print(list_d);
-
-//    print(n1);
-//    delete n1;
 
 }
 
