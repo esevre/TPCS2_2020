@@ -4,6 +4,13 @@
 #include <iostream>
 
 
+// if(head!=nullptr) {
+//   new_head = head->next;
+//   head -> next = nullptr;
+//   delete head;
+//   head = new_head;
+// }
+
 template <class Type>
 struct Node{
 public:
@@ -19,14 +26,14 @@ public:
         if (next != nullptr) {
             delete next;
         }
-        if (verbose) {
+        if (print_on_delete) {
             std::cout << "deleting node with value: " << value << std::endl;
         }
     }
 public:
     Type    value;
     NodePtr next = nullptr;
-    const bool verbose = false;
+    const bool print_on_delete = false;
 };
 
 template <class Type>
@@ -54,7 +61,10 @@ public:
         }
     }
     ~LinkedList() {
-        if (head) { delete head; }
+        if (head != nullptr)
+        {
+            delete head;
+        }
     }
 
     LinkedListRef push_back(const Type &val)
@@ -70,7 +80,6 @@ public:
         }
         return *this;
     }
-
 
     void merge_at_value(LinkedList &list2, const Type &val)
     {
@@ -124,12 +133,10 @@ public:
         list2.reset_head();
     }
 
-
     NodePtr      first()       { return head; }
     ConstNodePtr first() const { return head; }
 
     bool empty() const { return head==nullptr; }
-
 public:
     NodePtr head = nullptr;
 private:
@@ -164,8 +171,33 @@ void merge_at_value(LinkedList<Type> &list1, LinkedList<Type> &list2, Type value
     list1.merge_at_lambda(list2, [value](auto x){ return x == value; });
 }
 
+bool merge_test(bool print_lists = false){
+    LinkedList<char> list01 {'A', 'B', 'C', 'D'};
+    LinkedList<char> list02 {'1', '2', '3'};
+
+    if (print_lists) {
+        print(list01);
+        print(list02);
+    }
+
+    //    list01.merge_at_lambda(list02, [](auto x) { return x > 'B'; });
+    merge_at_value(list01, list02, 'B');
+
+    // the head of list02 should be nullptr, otherwise return false
+    if (!list02.empty()) { return false; }
+
+    return true;
+}
+
+
+
 int main(){
-//    Node<double> *n1 = new Node<double>(1.1);
+    if (merge_test()) {
+        std::cout << "merge test SUCCESS\n";
+    } else {
+        std::cout << "merge test FAILURE\n";
+    }
+//    ForwardNode<double> *n1 = new ForwardNode<double>(1.1);
 //    n1->insert_after(2.2);
 //    n1->insert_after(3.3);
 //    n1->insert_after(4.4);
@@ -179,16 +211,6 @@ int main(){
 
 //    LinkedList<double> list_d {1.1, 2.2, 3.3, 4.4, 5.5, 6.6};
 
-    LinkedList<char> list01 {'A', 'B', 'C', 'D'};
-    LinkedList<char> list02 {'1', '2', '3'};
-    print(list01);
-    print(list02);
-
-//    list01.merge_at_lambda(list02, [](auto x) { return x > 'B'; });
-    merge_at_value(list01, list02, 'B');
-    print(list01);
-    std::cout << "printing list 2:\n";
-    print(list02);
 
 //    print(list);
 //    print(list_d);
