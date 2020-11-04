@@ -4,13 +4,6 @@
 #include <iostream>
 
 
-// if(head!=nullptr) {
-//   new_head = head->next;
-//   head -> next = nullptr;
-//   delete head;
-//   head = new_head;
-// }
-
 template <class Type>
 struct Node{
 public:
