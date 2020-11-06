@@ -9,9 +9,14 @@
 #include "connection_test.hpp"
 #include "grab_site_simple.hpp"
 #include "grab_site.hpp"
+#include "grab_site_advanced.hpp"
 
 int main()
 {
-    grab_site_example();
+    std::string mrogue = "198.49.23.145";
+    auto contents = grab_site_advanced(mrogue);
+    std::cout << "program done\n";
+    std::cout << "************************\n";
+    std::cout << contents << std::endl;
 }
 
