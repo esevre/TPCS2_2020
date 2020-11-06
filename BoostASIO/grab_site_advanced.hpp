@@ -101,3 +101,14 @@ std::string grab_site_advanced(const std::string &address, const int port=80)
 }
 
 
+void grab_site_advanced_example()
+{
+    std::string mrogue = "198.49.23.145";
+    auto contents = grab_site_advanced(mrogue);
+    std::cout << "program done\n";
+    std::cout << "************************\n";
+    std::cout << contents << std::endl;
+
+}
+
+

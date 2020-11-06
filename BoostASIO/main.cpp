@@ -13,10 +13,6 @@
 
 int main()
 {
-    std::string mrogue = "198.49.23.145";
-    auto contents = grab_site_advanced(mrogue);
-    std::cout << "program done\n";
-    std::cout << "************************\n";
-    std::cout << contents << std::endl;
+    grab_site_advanced_example();
 }
 

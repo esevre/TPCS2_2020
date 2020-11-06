@@ -98,5 +98,3 @@ void grab_site_example()
 
 }
 
-
-
