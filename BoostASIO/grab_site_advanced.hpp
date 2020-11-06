@@ -13,6 +13,14 @@
 #include <boost/asio/ts/buffer.hpp>
 #include <boost/asio/ts/internet.hpp>
 
+struct SiteInfo {
+    SiteInfo(const std::string ip, const std::string url, const int port=80)
+        : site_ip(ip), site_url(url), port(port)
+    {}
+    std::string site_ip;
+    std::string site_url;
+    int port = 80;
+};
 
 struct DataGrabber {
     using Socket = boost::asio::ip::tcp::socket;
@@ -20,7 +28,7 @@ struct DataGrabber {
     DataGrabber() = delete;
     DataGrabber(const DataGrabber&) = delete;
 
-    DataGrabber(Socket & socket, OStream &ostream) : vBuffer(2*1024)
+    DataGrabber(Socket & socket, OStream &ostream) : vBuffer(num_units * unit)
     {
         GrabSomeData(socket, ostream);
     }
@@ -47,11 +55,14 @@ struct DataGrabber {
     }
 
 public:
+    const std::size_t unit = 1024;
+    const std::size_t num_units = 2;
     std::vector<char> vBuffer;
 };
 
 
-std::string grab_site_advanced(const std::string &address, const int port=80)
+
+std::string grab_site_advanced(const SiteInfo &site_info)
 {
     namespace sys  = boost::system;
     namespace asio = boost::asio;
@@ -68,7 +79,7 @@ std::string grab_site_advanced(const std::string &address, const int port=80)
     std::thread thrContext = std::thread([&](){ context.run(); });
 
     // endpoint is the server we want to connecto, and the port
-    asio::ip::tcp::endpoint endpoint(asio::ip::make_address(address, ec), port);
+    asio::ip::tcp::endpoint endpoint(asio::ip::make_address(site_info.site_ip, ec), site_info.port);
     // Create a socket, the context will deliver the implementation
     asio::ip::tcp::socket socket(context);
     // Tell the socket to try and connect
@@ -86,7 +97,7 @@ std::string grab_site_advanced(const std::string &address, const int port=80)
 
         std::string sRequest =
                 "GET /index.html HTTP/1.1\r\n"
-                "Host: themodernrogue.com\r\n"
+                "Host: " + site_info.site_url + "\r\n"
                 "Connection: close\r\n\r\n";
         socket.write_some(asio::buffer(sRequest.data(), sRequest.size()), ec);
 
@@ -104,7 +115,7 @@ std::string grab_site_advanced(const std::string &address, const int port=80)
 void grab_site_advanced_example()
 {
     std::string mrogue = "198.49.23.145";
-    auto contents = grab_site_advanced(mrogue);
+    auto contents = grab_site_advanced({mrogue, "themodernrogue.com"});
     std::cout << "program done\n";
     std::cout << "************************\n";
     std::cout << contents << std::endl;
