@@ -8,9 +8,10 @@
 #include <iostream>
 #include "connection_test.hpp"
 #include "grab_site_simple.hpp"
+#include "grab_site.hpp"
 
 int main()
 {
-
+    grab_site_example();
 }
 
