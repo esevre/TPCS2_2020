@@ -26,4 +26,4 @@ if (WIN32)
 endif ()
 
 include_directories(${Boost_INCLUDE_DIRS})
-add_executable(BoostASIO main.cpp connection_test.hpp)
+add_executable(BoostASIO main.cpp connection_test.hpp grab_site_simple.hpp)
