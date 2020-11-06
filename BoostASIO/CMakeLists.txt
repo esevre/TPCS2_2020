@@ -1,11 +1,10 @@
 cmake_minimum_required(VERSION 3.16)
 
-cmake_minimum_required(VERSION 3.17)
 project(BoostASIO)
 
 set(CMAKE_CXX_STANDARD 20)
 
-find_package(Boost)
+find_package(Boost REQUIRED)
 
 set(Boost_NO_SYSTEM_PATHS true)
 set(Boost_USE_STATIC_LIBS OFF CACHE BOOL "use static libraries from Boost")
@@ -27,4 +26,4 @@ if (WIN32)
 endif ()
 
 include_directories(${Boost_INCLUDE_DIRS})
-add_executable(BoostASIO main.cpp)
+add_executable(BoostASIO main.cpp connection_test.hpp)
