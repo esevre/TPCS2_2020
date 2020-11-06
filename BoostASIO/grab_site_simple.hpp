@@ -54,10 +54,12 @@ void grab_site_simple(const std::string &address, const int port=80)
             }
             std::cout << std::endl;
         }
-
-
     }
+}
 
+void grab_some_simple_example(){
+    std::string address01 = "93.184.216.34";
+    grab_site_simple(address01);
 }
 
 
